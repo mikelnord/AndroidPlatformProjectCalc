@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="button_text">20sp</dimen>
+    <dimen name="view_text">30sp</dimen>
+    <dimen name="rast">2dp</dimen>
+</resources>

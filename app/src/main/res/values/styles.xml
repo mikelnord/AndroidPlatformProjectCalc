@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="StyleButtonCalc">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:backgroundTint">@color/green</item>
+        <item name="android:layout_marginRight">@dimen/rast</item>
+        <item name="android:textSize">@dimen/button_text</item>
+        <item name="strokeColor">@color/black</item>
+        <item name="cornerRadius">30dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TableStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+<!--        <item name="android:layout_marginBottom">5dp</item>-->
+        <item name="android:gravity">center</item>
+    </style>
+</resources>
