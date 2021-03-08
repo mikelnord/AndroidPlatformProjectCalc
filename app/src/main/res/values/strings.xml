@@ -23,4 +23,7 @@
     <string name="c">C</string>
     <string name="backspase"><![CDATA[<--]]></string>
     <string name="umn">*</string>
+    <string name="default_theme">Theme.ProjectCalc</string>
+    <string name="dark">Theme.ProjectCalcDark</string>
+    <string name="light_dark">light/dark</string>
 </resources>

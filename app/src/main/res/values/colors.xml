@@ -10,5 +10,7 @@
     <color name="green">#FF009933</color>
     <color name="primary">#FF008b00</color>
     <color name="primary_variant">#FF09af00</color>
+    <color name="gray">#FF616161</color>
+    <color name="lightgray">#FF9E9E9E</color>
 
 </resources>

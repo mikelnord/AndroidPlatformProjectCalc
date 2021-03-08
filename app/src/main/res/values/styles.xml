@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="StyleButtonCalc">
+    <style name="StyleButtonCalc" parent="Widget.MaterialComponents.Button">
         <item name="android:textColor">@color/black</item>
         <item name="android:backgroundTint">@color/green</item>
         <item name="android:layout_marginRight">@dimen/rast</item>
@@ -10,6 +10,11 @@
         <item name="cornerRadius">30dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="StyleButtonCalcDark" parent="StyleButtonCalc">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:backgroundTint">@color/black</item>
     </style>
 
     <style name="TableStyle">

@@ -3,10 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fonimage"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:theme="@style/TableStyle">
+
+    <TableRow>
+
+        <Switch
+            android:id="@+id/switchDN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="4"
+            android:checked="true"
+            android:hint="@string/light_dark"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+    </TableRow>
 
     <TableRow>
 
@@ -24,26 +35,24 @@
             tools:text="0.0" />
     </TableRow>
 
-    <TableRow>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_proc"
-            style="@style/StyleButtonCalc"
             android:text="@string/proc" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_ce"
-            style="@style/StyleButtonCalc"
             android:text="@string/ce" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_c"
-            style="@style/StyleButtonCalc"
             android:text="@string/c" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_umn"
-            style="@style/StyleButtonCalc"
             android:text="@string/umn" />
     </TableRow>
 
@@ -51,22 +60,18 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_1"
-            style="@style/StyleButtonCalc"
             android:text="@string/_1" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_2"
-            style="@style/StyleButtonCalc"
             android:text="@string/_2" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_3"
-            style="@style/StyleButtonCalc"
             android:text="@string/_3" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_plus"
-            style="@style/StyleButtonCalc"
             android:text="@string/plus" />
     </TableRow>
 
@@ -74,22 +79,18 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_4"
-            style="@style/StyleButtonCalc"
             android:text="@string/_4" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_5"
-            style="@style/StyleButtonCalc"
             android:text="@string/_5" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_6"
-            style="@style/StyleButtonCalc"
             android:text="@string/_6" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_minus"
-            style="@style/StyleButtonCalc"
             android:text="@string/minus" />
     </TableRow>
 
@@ -97,22 +98,18 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_7"
-            style="@style/StyleButtonCalc"
             android:text="@string/_7" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_8"
-            style="@style/StyleButtonCalc"
             android:text="@string/_8" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_9"
-            style="@style/StyleButtonCalc"
             android:text="@string/_9" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_div"
-            style="@style/StyleButtonCalc"
             android:text="@string/rd" />
     </TableRow>
 
@@ -120,24 +117,19 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_pm"
-            style="@style/StyleButtonCalc"
             android:text="@string/_pm" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_0"
-            style="@style/StyleButtonCalc"
             android:text="@string/_0" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_point"
-            style="@style/StyleButtonCalc"
             android:text="@string/_point" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_rav"
-            style="@style/StyleButtonCalc"
             android:text="@string/rv" />
-
     </TableRow>
 
 </TableLayout>
