@@ -2,9 +2,15 @@ package ru.geekbrains.courses.androidplatform.mikelnord.projectcalc;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
+
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,9 +34,12 @@ public class MainActivity extends AppCompatActivity {
     private Button mButtonC;
     private Button mButtonCE;
     private Button mButtonPm;
+    private Switch mSwitch;
     private final static String keyCalc = "Calc";
     private final static String keyText = "textViewText";
 
+    SharedPreferences sharedPreferences;
+    String themeName;
 
     private TextView mTextView;
     Calc calc;
@@ -38,9 +47,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences = getSharedPreferences("Theme", Context.MODE_PRIVATE);
+        themeName = sharedPreferences.getString("ThemeName", "Default");
+        if (themeName.equalsIgnoreCase("DarkTheme")) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            setTheme(R.style.Theme_ProjectCalcDark);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            setTheme(R.style.Theme_ProjectCalc);
+        }
         setContentView(R.layout.activity_main);
         initButton();
         inizial();
+    }
+
+    public void setTheme(String name) {
+        SharedPreferences preferences = getSharedPreferences("Theme", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("ThemeName", name);
+        editor.apply();
+        recreate();
     }
 
     @Override
@@ -78,12 +104,27 @@ public class MainActivity extends AppCompatActivity {
         mButtonC = findViewById(R.id.button_c);
         mButtonCE = findViewById(R.id.button_ce);
         mButtonPm = findViewById(R.id.button_pm);
+        mSwitch = findViewById(R.id.switchDN);
     }
+
 
     private void inizial() {
         calc = new Calc();
         mTextView = findViewById(R.id.monitorTextView);
         mTextView.setText("0");
+
+        mSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean checked = ((Switch) v).isChecked();
+                if (checked) {
+                    setTheme("Default");
+                } else {
+                    setTheme("DarkTheme");
+                }
+            }
+        });
+
 
         mButtonPm.setOnClickListener(view -> {
             String st = mTextView.getText().toString();
