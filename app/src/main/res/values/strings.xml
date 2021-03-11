@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProjectCalc</string>
+    <string name="app_name">Calculator</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
     <string name="_3">3</string>
@@ -21,9 +21,14 @@
     <string name="proc">%</string>
     <string name="ce">CE</string>
     <string name="c">C</string>
-    <string name="backspase"><![CDATA[<--]]></string>
+    <string name="backspase"><![CDATA[<—]]></string>
     <string name="umn">*</string>
-    <string name="default_theme">Theme.ProjectCalc</string>
-    <string name="dark">Theme.ProjectCalcDark</string>
-    <string name="light_dark">light/dark</string>
+
+    <string name="OK">OK</string>
+    <string name="Cancel">CANCEL</string>
+
+    <string name="theme_dark">Dark</string>
+    <string name="theme_green">Green</string>
+    <string name="theme_broun">Broun</string>
+
 </resources>

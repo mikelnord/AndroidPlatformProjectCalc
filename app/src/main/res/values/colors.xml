@@ -12,5 +12,10 @@
     <color name="primary_variant">#FF09af00</color>
     <color name="gray">#FF616161</color>
     <color name="lightgray">#FF9E9E9E</color>
+    <color name="brounPrimary">#FF5D4037</color>
+    <color name="brounPrimaryVariant">#A1887F</color>
+    <color name="brounOnPrimary">#BCAAA4</color>
+    <color name="brounSecondary">#6D4C41</color>
+    <color name="brounSecondaryVariant">#D7CCC8</color>
 
 </resources>

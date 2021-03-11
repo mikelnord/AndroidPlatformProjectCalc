@@ -17,10 +17,14 @@
         <item name="android:backgroundTint">@color/black</item>
     </style>
 
+    <style name="StyleButtonCalcBroun" parent="StyleButtonCalc">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:backgroundTint">@color/brounPrimary</item>
+    </style>
+
     <style name="TableStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-<!--        <item name="android:layout_marginBottom">5dp</item>-->
         <item name="android:gravity">center</item>
     </style>
 </resources>

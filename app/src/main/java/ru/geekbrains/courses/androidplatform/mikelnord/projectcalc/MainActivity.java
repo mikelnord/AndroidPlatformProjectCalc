@@ -2,15 +2,15 @@ package ru.geekbrains.courses.androidplatform.mikelnord.projectcalc;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 
-
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.Switch;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,28 +34,29 @@ public class MainActivity extends AppCompatActivity {
     private Button mButtonC;
     private Button mButtonCE;
     private Button mButtonPm;
-    private Switch mSwitch;
     private final static String keyCalc = "Calc";
     private final static String keyText = "textViewText";
 
-    SharedPreferences sharedPreferences;
-    String themeName;
-
     private TextView mTextView;
-    Calc calc;
+    private Calc calc;
+    private String themeName;
+    private static final int REQUEST_CODE = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPreferences = getSharedPreferences("Theme", Context.MODE_PRIVATE);
-        themeName = sharedPreferences.getString("ThemeName", "Default");
-        if (themeName.equalsIgnoreCase("DarkTheme")) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            setTheme(R.style.Theme_ProjectCalcDark);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        SharedPreferences sharedPreferences = getSharedPreferences("Theme", Context.MODE_PRIVATE);
+        themeName = sharedPreferences.getString("ThemeName", themeName);
+        if (themeName == null) themeName = getString(R.string.theme_green);
+        if (themeName.equals(getString(R.string.theme_green))) {
             setTheme(R.style.Theme_ProjectCalc);
+        } else if (themeName.equals(getString(R.string.theme_dark))) {
+            setTheme(R.style.Theme_ProjectCalcDark);
+        } else if (themeName.equals(getString(R.string.theme_broun))) {
+            setTheme(R.style.Theme_ProjectCalcBroun);
         }
+
         setContentView(R.layout.activity_main);
         initButton();
         inizial();
@@ -104,27 +105,12 @@ public class MainActivity extends AppCompatActivity {
         mButtonC = findViewById(R.id.button_c);
         mButtonCE = findViewById(R.id.button_ce);
         mButtonPm = findViewById(R.id.button_pm);
-        mSwitch = findViewById(R.id.switchDN);
     }
-
 
     private void inizial() {
         calc = new Calc();
         mTextView = findViewById(R.id.monitorTextView);
         mTextView.setText("0");
-
-        mSwitch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean checked = ((Switch) v).isChecked();
-                if (checked) {
-                    setTheme("Default");
-                } else {
-                    setTheme("DarkTheme");
-                }
-            }
-        });
-
 
         mButtonPm.setOnClickListener(view -> {
             String st = mTextView.getText().toString();
@@ -211,6 +197,39 @@ public class MainActivity extends AppCompatActivity {
             if ((s.lastIndexOf(".0") > 0) && (s.lastIndexOf(".0") == s.length() - 2))
                 s = s.substring(0, s.length() - 2);
             mTextvew.setText(s);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.setting:
+                Intent runSettings = SettingActivity.newIntent(MainActivity.this, themeName);
+                startActivityForResult(runSettings, REQUEST_CODE);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        if (requestCode == REQUEST_CODE) {
+            if (data == null) {
+                return;
+            }
+            themeName = SettingActivity.returnResult(data);
+            setTheme(themeName);
         }
     }
 }
