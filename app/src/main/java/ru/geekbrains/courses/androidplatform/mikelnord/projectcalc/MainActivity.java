@@ -3,7 +3,13 @@ package ru.geekbrains.courses.androidplatform.mikelnord.projectcalc;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -31,16 +37,37 @@ public class MainActivity extends AppCompatActivity {
     private final static String keyCalc = "Calc";
     private final static String keyText = "textViewText";
 
-
     private TextView mTextView;
-    Calc calc;
+    private Calc calc;
+    private String themeName;
+    private static final int REQUEST_CODE = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sharedPreferences = getSharedPreferences("Theme", Context.MODE_PRIVATE);
+        themeName = sharedPreferences.getString("ThemeName", themeName);
+        if (themeName == null) themeName = getString(R.string.theme_green);
+        if (themeName.equals(getString(R.string.theme_green))) {
+            setTheme(R.style.Theme_ProjectCalc);
+        } else if (themeName.equals(getString(R.string.theme_dark))) {
+            setTheme(R.style.Theme_ProjectCalcDark);
+        } else if (themeName.equals(getString(R.string.theme_broun))) {
+            setTheme(R.style.Theme_ProjectCalcBroun);
+        }
+
         setContentView(R.layout.activity_main);
         initButton();
         inizial();
+    }
+
+    public void setTheme(String name) {
+        SharedPreferences preferences = getSharedPreferences("Theme", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("ThemeName", name);
+        editor.apply();
+        recreate();
     }
 
     @Override
@@ -170,6 +197,39 @@ public class MainActivity extends AppCompatActivity {
             if ((s.lastIndexOf(".0") > 0) && (s.lastIndexOf(".0") == s.length() - 2))
                 s = s.substring(0, s.length() - 2);
             mTextvew.setText(s);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.setting:
+                Intent runSettings = SettingActivity.newIntent(MainActivity.this, themeName);
+                startActivityForResult(runSettings, REQUEST_CODE);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+        if (requestCode == REQUEST_CODE) {
+            if (data == null) {
+                return;
+            }
+            themeName = SettingActivity.returnResult(data);
+            setTheme(themeName);
         }
     }
 }
